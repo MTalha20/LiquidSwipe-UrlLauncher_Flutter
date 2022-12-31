@@ -11,9 +11,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   late LiquidController liquidController;
   late UpdateType updateType;
   int page = 0;
+  TextEditingController _controller = TextEditingController();
   List<Item> data = [
     Item(Colors.amber, 'assets/google.png', 'Google Search', 'https', 'google.com'),
     Item(Colors.white, 'assets/mail.png', 'E-Mail', "mailto", "talha.wahid15@gmail.com"),
@@ -39,44 +41,46 @@ class _HomeState extends State<Home> {
       ),
       body: Stack(
         children: <Widget>[
-          LiquidSwipe.builder(
-            itemCount:  data.length,
-            itemBuilder: (BuildContext context, int index){
-              return Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: data[index].color,
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.22),
+          Expanded(
+            child: LiquidSwipe.builder(
+              itemCount:  data.length,
+              itemBuilder: (BuildContext context, int index){
+                return Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: data[index].color,
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.22),
+                        ),
+                    GestureDetector(
+                      onTap: () => Url().url(data[index].scheme, _controller.text),
+                      child: Image.asset(data[index].image,
+                      height: 200,
+                      fit: BoxFit.contain,
                       ),
-                  GestureDetector(
-                    onTap: () => Url().url(data[index].scheme, data[index].path),
-                    child: Image.asset(data[index].image,
-                    height: 200,
-                    fit: BoxFit.contain,
                     ),
-                  ),
-                  Padding(
-                        padding: EdgeInsets.all(20.0),
-                      ),
-                  SizedBox(height: 20,),
-                  Center(child: Text(data[index].text, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,),)),
-                ],),
-              );
-            },
-            positionSlideIcon: 0.8,
-            slideIconWidget: Icon(Icons.arrow_back_ios),
-            onPageChangeCallback: pageChangeCallback,
-            waveType: WaveType.liquidReveal,
-            liquidController: liquidController,
-            fullTransitionValue: 880,
-            enableSideReveal: true,
-            enableLoop: true,
-            ignoreUserGestureWhileAnimating: true, 
-            ),
-
+                    Padding(
+                          padding: EdgeInsets.all(20.0),
+                        ),
+                    SizedBox(height: 20,),
+                    Center(child: Text(data[index].text, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: index > 1 ? Colors.white : Colors.black),)),
+                  ],),
+                );
+              },
+              positionSlideIcon: 0.8,
+              slideIconWidget: Icon(Icons.arrow_back_ios),
+              onPageChangeCallback: pageChangeCallback,
+              waveType: WaveType.liquidReveal,
+              liquidController: liquidController,
+              fullTransitionValue: 880,
+              enableSideReveal: true,
+              enableLoop: true,
+              ignoreUserGestureWhileAnimating: true, 
+              ),
+          ),
+      
       Padding(
         padding: EdgeInsets.all(20),
         child: Column(children: [
@@ -87,7 +91,7 @@ class _HomeState extends State<Home> {
           ),
         ],),
         ),
-
+      
         Align(
               alignment: Alignment.bottomRight,
               child: Padding(
@@ -154,10 +158,10 @@ pageChangeCallback(int lpage) {
       page = lpage;
     });
   }
+
+
+
 }
-
-
-
 
 class Item{
 
