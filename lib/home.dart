@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text("LiquidParserPackage-Flutter", style: TextStyle(color: Colors.black)),
+        title: Text("LiquidSwipe & UrlLauncher-Flutter", style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal)),
       ),
       body: Stack(
         children: <Widget>[
@@ -66,6 +66,8 @@ class _HomeState extends State<Home> {
                         ),
                     SizedBox(height: 20,),
                     Center(child: Text(data[index].text, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: index > 1 ? Colors.white : Colors.black),)),
+                    SizedBox(height: 20,),
+                    Center(child: Text("Click At Icon", style: TextStyle(fontSize: 16, color: index > 1 ? Colors.white : Colors.black)),)
                   ],),
                 );
               },
