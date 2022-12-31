@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
                           padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.22),
                         ),
                     GestureDetector(
-                      onTap: () => Url().url(data[index].scheme, _controller.text),
+                      onTap: () => Url().url(data[index].scheme, data[index].path),
                       child: Image.asset(data[index].image,
                       height: 200,
                       fit: BoxFit.contain,
